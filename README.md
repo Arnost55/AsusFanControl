@@ -17,7 +17,9 @@ Go to [releases](../../releases)
         --get-cpu-temp
 </details>
 
-GUI: `AsusFanControlGUI.exe`  
+GUI: `AsusFanControlGUI.exe`
+
+The GUI now self-bootstraps to administrator and `SYSTEM` when `PsExec.exe` is available next to the app or in `Documents\AsusFanControl`, so you can launch it directly or through `run.bat` without the old two-step manual start.
 
 The GUI now uses a dark dashboard with presets, live telemetry, and safer one-click control.
 
