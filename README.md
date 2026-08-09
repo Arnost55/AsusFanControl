@@ -17,9 +17,13 @@ Go to [releases](../../releases)
         --get-cpu-temp
 </details>
 
-GUI: `AsusFanControlGUI.exe`  
+GUI: `AsusFanControlGUI.exe`
 
-![AsusFanControlGUI](https://github.com/Karmel0x/AsusFanControl/assets/25367564/fe197ad0-7079-4d51-ae78-177cb6369e96)
+The GUI now self-bootstraps to administrator and `SYSTEM` when `PsExec.exe` is available next to the app or in `Documents\AsusFanControl`, so you can launch it directly or through `run.bat` without the old two-step manual start.
+
+The GUI now uses a dark dashboard with presets, live telemetry, and safer one-click control.
+
+![Asus Fan Control dashboard](README-assets/asus-fan-control-dashboard.png)
 
 ### Why need it?
 My laptop does not support the [Fan Profile](https://github.com/Karmel0x/AsusFanControl/assets/25367564/924d990a-bf20-4b8d-bf9d-56c460174d99) option, but it often overheats. Looked for apps to control fans, but none is working.

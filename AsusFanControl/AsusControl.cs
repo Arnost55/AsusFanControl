@@ -1,14 +1,14 @@
-﻿using AsusSystemAnalysis;
+using AsusSystemAnalysis;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace AsusFanControl
 {
-    public class AsusControl
+    public class AsusControl : IDisposable
     {
+        private bool disposed;
+
         public AsusControl()
         {
             AsusWinIO64.InitializeWinIo();
@@ -16,11 +16,60 @@ namespace AsusFanControl
 
         ~AsusControl()
         {
-            AsusWinIO64.ShutdownWinIo();
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            try
+            {
+                AsusWinIO64.ShutdownWinIo();
+            }
+            catch
+            {
+                // Best-effort cleanup only.
+            }
+
+            disposed = true;
+        }
+
+        private void EnsureNotDisposed()
+        {
+            if (disposed)
+            {
+                throw new ObjectDisposedException(nameof(AsusControl));
+            }
+        }
+
+        private static int ClampPercent(int percent)
+        {
+            if (percent < 0)
+            {
+                return 0;
+            }
+
+            if (percent > 100)
+            {
+                return 100;
+            }
+
+            return percent;
         }
 
         public void SetFanSpeed(byte value, byte fanIndex = 0)
         {
+            EnsureNotDisposed();
             AsusWinIO64.HealthyTable_SetFanIndex(fanIndex);
             AsusWinIO64.HealthyTable_SetFanTestMode((char)(value > 0 ? 0x01 : 0x00));
             AsusWinIO64.HealthyTable_SetFanPwmDuty(value);
@@ -28,28 +77,35 @@ namespace AsusFanControl
 
         public void SetFanSpeed(int percent, byte fanIndex = 0)
         {
+            EnsureNotDisposed();
+            percent = ClampPercent(percent);
             var value = (byte)(percent / 100.0f * 255);
             SetFanSpeed(value, fanIndex);
         }
 
-        public async void SetFanSpeeds(byte value)
+        public void SetFanSpeeds(byte value)
         {
+            EnsureNotDisposed();
+
             var fanCount = AsusWinIO64.HealthyTable_FanCounts();
-            for(byte fanIndex = 0; fanIndex < fanCount; fanIndex++)
+            for (byte fanIndex = 0; fanIndex < fanCount; fanIndex++)
             {
                 SetFanSpeed(value, fanIndex);
-                await Task.Delay(20);
+                Thread.Sleep(20);
             }
         }
 
         public void SetFanSpeeds(int percent)
         {
+            EnsureNotDisposed();
+            percent = ClampPercent(percent);
             var value = (byte)(percent / 100.0f * 255);
             SetFanSpeeds(value);
         }
 
         public int GetFanSpeed(byte fanIndex = 0)
         {
+            EnsureNotDisposed();
             AsusWinIO64.HealthyTable_SetFanIndex(fanIndex);
             var fanSpeed = AsusWinIO64.HealthyTable_FanRPM();
             return fanSpeed;
@@ -57,6 +113,7 @@ namespace AsusFanControl
 
         public List<int> GetFanSpeeds()
         {
+            EnsureNotDisposed();
             var fanSpeeds = new List<int>();
 
             var fanCount = AsusWinIO64.HealthyTable_FanCounts();
@@ -71,11 +128,13 @@ namespace AsusFanControl
 
         public int HealthyTable_FanCounts()
         {
+            EnsureNotDisposed();
             return AsusWinIO64.HealthyTable_FanCounts();
         }
 
         public ulong Thermal_Read_Cpu_Temperature()
         {
+            EnsureNotDisposed();
             return AsusWinIO64.Thermal_Read_Cpu_Temperature();
         }
     }

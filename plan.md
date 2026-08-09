@@ -13,6 +13,13 @@
 - Use Win32 interop for elevation, tray icon, window restore, and persistence under `%LocalAppData%\AsusFanControl`.
 - Keep the existing C# app only as a reference during the migration, then retire it once the native app matches feature parity.
 
+## Delivery Phases
+- Phase 1: scaffold the native app and solution wiring.
+- Phase 2: move ASUS hardware access into a small native core library with clear read/apply/snapshot APIs.
+- Phase 3: rebuild the dashboard in XAML and match the existing control flow, presets, telemetry, and safety checks.
+- Phase 4: restore shell behavior, including elevation, tray support, window restore, and `%LocalAppData%\AsusFanControl` persistence.
+- Phase 5: run the x64 Debug/Release matrix, verify launch stability, and retire the C# UI once parity is proven.
+
 ## Test Plan
 - Build `x64` Debug and Release from a clean branch or worktree.
 - Launch with and without elevation and confirm the app opens normally instead of vanishing after the UAC prompt.
@@ -21,6 +28,5 @@
 - Confirm the native app still handles ASUS service or DLL failures without crashing.
 
 ## Assumptions
-- This file lives in `C:\Users\Arnika\Desktop\AsusFanControl\plan.md`, which is the actual desktop checkout available on disk.
-- The repository's mainline branch is `master` in this checkout, so future implementation work should branch from and merge back to `master` unless the branch is renamed later.
+- This plan is being executed in a Codex worktree; verify the canonical upstream branch before creating the migration branch.
 - The first milestone is feature parity and launch stability; polish refinements can follow once the native shell is stable.

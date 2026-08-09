@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BAA77435-0C08-4CFE-8F76-AD652062ED1F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>AsusFanControlNative</RootNamespace>
+    <ProjectName>AsusFanControlNative</ProjectName>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <UseWinUI>true</UseWinUI>
+    <WinUISDKReferences>false</WinUISDKReferences>
+    <IncludeFrameworkReferencesFromNuGet>false</IncludeFrameworkReferencesFromNuGet>
+    <CppWinRTProjectLanguage>C++/WinRT</CppWinRTProjectLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetFramework>native,Version=v0.0</TargetFramework>
+    <TargetFrameworks>native,Version=v0.0</TargetFrameworks>
+    <TargetFrameworkIdentifier>native</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v0.0</TargetFrameworkVersion>
+    <TargetFrameworkMoniker>native,Version=v0.0</TargetFrameworkMoniker>
+    <NuGetTargetFrameworkMonikerToInject>native,Version=v0.0</NuGetTargetFrameworkMonikerToInject>
+    <NuGetTargetMonikerToInject>native,Version=v0.0</NuGetTargetMonikerToInject>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
+    <ImplicitlyExpandTargetPlatform>true</ImplicitlyExpandTargetPlatform>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <TrackFileAccess>false</TrackFileAccess>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <AppxPackage>false</AppxPackage>
+    <AppContainerApplication>false</AppContainerApplication>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <TrackFileAccess>false</TrackFileAccess>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <AppxPackage>false</AppxPackage>
+    <AppContainerApplication>false</AppContainerApplication>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+
+  <PropertyGroup Label="UserMacros" />
+
+  <PropertyGroup>
+    <OutDir>..\out\x64\$(Configuration)\</OutDir>
+    <IntDir>..\out\x64\$(Configuration)\$(ProjectName)\</IntDir>
+    <WindowsSDK_MetadataPath>$(WindowsSdkDir)UnionMetadata</WindowsSDK_MetadataPath>
+    <TargetPlatformSdkMetadataLocation>$(WindowsSdkDir)UnionMetadata</TargetPlatformSdkMetadataLocation>
+    <TargetPlatformWinMDLocation>$(WindowsSdkDir)UnionMetadata</TargetPlatformWinMDLocation>
+    <RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
+    <UseEnv>true</UseEnv>
+    <CLToolPath>$(VCToolsInstallDir)bin\Hostx64\x64\</CLToolPath>
+    <LinkToolPath>$(VCToolsInstallDir)bin\Hostx64\x64\</LinkToolPath>
+    <LIBToolPath>$(VCToolsInstallDir)bin\Hostx64\x64\</LIBToolPath>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4002</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>if exist "$(SolutionDir)AsusFanControl\AsusWinIO64.dll" copy /Y "$(SolutionDir)AsusFanControl\AsusWinIO64.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4002</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>if exist "$(SolutionDir)AsusFanControl\AsusWinIO64.dll" copy /Y "$(SolutionDir)AsusFanControl\AsusWinIO64.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.CppWinRT" Version="3.0.260715.1" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AsusFanControlNativeCore\AsusFanControlNativeCore.vcxproj">
+      <Project>{C5F55747-2425-4DAB-B469-4DF6F268DC65}</Project>
+      <Name>AsusFanControlNativeCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Midl Include="MainWindow.idl" />
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="MainWindow.xaml.h" />
+    <ClInclude Include="MainWindow.xaml.impl.hpp" />
+    <ClInclude Include="NativeStateStore.h" />
+    <ClInclude Include="TrayIconController.h" />
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ClCompile Include="App.xaml.cpp">
+      <DependentUpon>App.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="MainWindow.xaml.cpp">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="NativeStateStore.cpp" />
+    <ClCompile Include="TrayIconController.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\AsusFanControl\AsusWinIO64.dll">
+      <Link>AsusWinIO64.dll</Link>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ReferencePath Include="$(WindowsSdkDir)UnionMetadata\$(WindowsTargetPlatformVersion)\Windows.winmd" Condition="Exists('$(WindowsSdkDir)UnionMetadata\$(WindowsTargetPlatformVersion)\Windows.winmd')">
+      <WinMDFile>true</WinMDFile>
+      <CopyLocal>false</CopyLocal>
+      <ReferenceGrouping>$(TargetPlatformMoniker)</ReferenceGrouping>
+      <ReferenceGroupingDisplayName>$(TargetPlatformDisplayName)</ReferenceGroupingDisplayName>
+      <ResolvedFrom>ExplicitTargetPlatformReference</ResolvedFrom>
+      <IsSystemReference>True</IsSystemReference>
+    </ReferencePath>
+  </ItemGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+
+  <PropertyGroup>
+    <ImplicitlyExpandTargetPlatform>true</ImplicitlyExpandTargetPlatform>
+  </PropertyGroup>
+</Project>
