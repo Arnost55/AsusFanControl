@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="AsusFanControlNative.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    MinWidth="960"
+    MinHeight="720"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <FontFamily x:Key="DisplayFont">Segoe UI Variable Display</FontFamily>
+        <FontFamily x:Key="BodyFont">Segoe UI Variable Text</FontFamily>
+
+        <Style x:Key="NeutralButtonStyle" TargetType="Button">
+            <Setter Property="MinHeight" Value="40" />
+            <Setter Property="Padding" Value="14,10" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Background" Value="#141B24" />
+            <Setter Property="BorderBrush" Value="#263341" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#EDF2F7" />
+            <Setter Property="FontFamily" Value="{StaticResource BodyFont}" />
+        </Style>
+
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource NeutralButtonStyle}">
+            <Setter Property="Background" Value="#5F7893" />
+            <Setter Property="BorderBrush" Value="#738CA6" />
+            <Setter Property="Foreground" Value="#08111A" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style x:Key="PresetButtonStyle" TargetType="Button" BasedOn="{StaticResource NeutralButtonStyle}">
+            <Setter Property="MinHeight" Value="34" />
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Background" Value="#111822" />
+            <Setter Property="BorderBrush" Value="#243140" />
+        </Style>
+    </Page.Resources>
+
+    <Grid Padding="24" MinWidth="960" MinHeight="720">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#06080C" Offset="0.0" />
+                <GradientStop Color="#0B1117" Offset="0.58" />
+                <GradientStop Color="#101820" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid IsHitTestVisible="False">
+            <Ellipse
+                Width="540"
+                Height="540"
+                Fill="#142131"
+                Opacity="0.12"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,-240,-160,0" />
+            <Ellipse
+                Width="360"
+                Height="360"
+                Fill="#101A24"
+                Opacity="0.24"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="-160,0,0,-180" />
+        </Grid>
+
+        <Border CornerRadius="16" BorderBrush="#253241" BorderThickness="1" Background="#0F161E" Padding="24">
+            <Grid ColumnSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Spacing="10">
+                    <Border Width="72" Height="3" CornerRadius="999" Background="#5F7893" />
+                    <TextBlock
+                        Text="SYSTEM OVERVIEW"
+                        FontSize="12"
+                        FontWeight="SemiBold"
+                        CharacterSpacing="80"
+                        FontFamily="{StaticResource BodyFont}"
+                        Foreground="#7E8B99" />
+                    <TextBlock
+                        Text="Asus Fan Control"
+                        FontSize="28"
+                        FontWeight="SemiBold"
+                        FontFamily="{StaticResource DisplayFont}"
+                        Foreground="#F0F5FC" />
+                    <TextBlock
+                        x:Name="StatusSubtitle"
+                        Text="Native Windows shell for fan control, telemetry, and tray behavior."
+                        FontFamily="{StaticResource BodyFont}"
+                        TextWrapping="WrapWholeWords"
+                        Foreground="#97A4B4" />
+                    <StackPanel Orientation="Horizontal" Spacing="18" Margin="0,8,0,0">
+                        <StackPanel Spacing="2">
+                            <TextBlock
+                                Text="Hardware"
+                                FontFamily="{StaticResource BodyFont}"
+                                Foreground="#7E8B99"
+                                FontSize="11"
+                                FontWeight="SemiBold" />
+                            <TextBlock
+                                x:Name="HardwareStateBadge"
+                                Text="Checking hardware..."
+                                FontFamily="{StaticResource BodyFont}"
+                                Foreground="#EDF2F7"
+                                FontWeight="SemiBold" />
+                        </StackPanel>
+                        <TextBlock
+                            Text="Staged apply | tray-aware | local persistence"
+                            VerticalAlignment="Center"
+                            FontFamily="{StaticResource BodyFont}"
+                            Foreground="#97A4B4" />
+                    </StackPanel>
+                    <StackPanel Margin="0,6,0,0" Spacing="6">
+                        <StackPanel Orientation="Horizontal" Spacing="24">
+                            <StackPanel Spacing="2">
+                                <TextBlock
+                                    Text="Session"
+                                    FontFamily="{StaticResource BodyFont}"
+                                    Foreground="#7E8B99"
+                                    FontSize="11"
+                                    FontWeight="SemiBold" />
+                                <TextBlock
+                                    x:Name="SessionStateBadge"
+                                    Text="Standard session"
+                                    FontFamily="{StaticResource BodyFont}"
+                                    Foreground="#EDF2F7"
+                                    FontWeight="SemiBold" />
+                            </StackPanel>
+                            <StackPanel Spacing="2">
+                                <TextBlock
+                                    Text="Pending state"
+                                    FontFamily="{StaticResource BodyFont}"
+                                    Foreground="#7E8B99"
+                                    FontSize="11"
+                                    FontWeight="SemiBold" />
+                                <TextBlock
+                                    x:Name="PendingStateBadge"
+                                    Text="Synced"
+                                    FontFamily="{StaticResource BodyFont}"
+                                    Foreground="#EDF2F7"
+                                    FontWeight="SemiBold" />
+                            </StackPanel>
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="LastRefreshText"
+                            Text="Last refreshed after startup checks."
+                            FontFamily="{StaticResource BodyFont}"
+                            FontSize="11"
+                            Foreground="#7E8B99" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Spacing="8">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+                        <Button Style="{StaticResource NeutralButtonStyle}" Content="Refresh" Click="RefreshClicked" />
+                        <Button x:Name="ApplyButton" Style="{StaticResource PrimaryButtonStyle}" Content="Apply to hardware" Click="ApplyClicked" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+                        <Button x:Name="DiscardButton" Style="{StaticResource NeutralButtonStyle}" Content="Revert staged changes" Click="DiscardClicked" />
+                        <Button Style="{StaticResource NeutralButtonStyle}" Content="Exit" Click="ExitClicked" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border
+            x:Name="ErrorBanner"
+            Grid.Row="1"
+            CornerRadius="16"
+            BorderBrush="#7B4650"
+            BorderThickness="1"
+            Background="#21161A"
+            Padding="16"
+            Margin="0,16,0,0"
+            Visibility="Collapsed">
+            <StackPanel Spacing="4">
+                <TextBlock
+                    x:Name="ErrorTitleText"
+                    Text="ASUS hardware read failed"
+                    FontSize="16"
+                    FontWeight="SemiBold"
+                    Foreground="#F0F5FC" />
+                <TextBlock
+                    x:Name="ErrorDetailText"
+                    Text="The native bridge will surface the missing service or DLL details here."
+                    TextWrapping="WrapWholeWords"
+                    Foreground="#D0D7E0" />
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <Grid ColumnSpacing="16" RowSpacing="16" Margin="0,16,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border CornerRadius="18" BorderBrush="#253241" BorderThickness="1" Background="#0F161E" Padding="22">
+                    <StackPanel Spacing="14">
+                        <TextBlock
+                            Text="Manual fan control"
+                            FontSize="20"
+                            FontWeight="SemiBold"
+                            FontFamily="{StaticResource DisplayFont}"
+                            Foreground="#F0F5FC" />
+                        <TextBlock
+                            Text="Stage a target speed with the slider or a preset. Apply writes the selection to hardware, and revert rolls back the pending change."
+                            FontFamily="{StaticResource BodyFont}"
+                            TextWrapping="WrapWholeWords"
+                            Foreground="#97A4B4" />
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="Target speed" FontFamily="{StaticResource BodyFont}" Foreground="#C8D0DC" FontWeight="SemiBold" FontSize="12" />
+                            <Slider
+                                x:Name="SpeedSlider"
+                                Minimum="0"
+                                Maximum="100"
+                                Value="55"
+                                ValueChanged="SpeedSlider_ValueChanged" />
+                            <TextBlock
+                                x:Name="RequestedSpeedValue"
+                                Text="55%"
+                                FontSize="22"
+                                FontWeight="SemiBold"
+                                FontFamily="{StaticResource DisplayFont}"
+                                Foreground="#8FA8C2" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Style="{StaticResource PresetButtonStyle}" Content="Quiet" Tag="40" Click="PresetButton_Click" />
+                            <Button Style="{StaticResource PresetButtonStyle}" Content="Balanced" Tag="55" Click="PresetButton_Click" />
+                            <Button Style="{StaticResource PresetButtonStyle}" Content="Performance" Tag="75" Click="PresetButton_Click" />
+                            <Button Style="{StaticResource PresetButtonStyle}" Content="Max" Tag="99" Click="PresetButton_Click" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" CornerRadius="16" BorderBrush="#253241" BorderThickness="1" Background="#0F161E" Padding="22">
+                    <StackPanel Spacing="14">
+                        <TextBlock
+                            Text="Telemetry"
+                            FontSize="20"
+                            FontWeight="SemiBold"
+                            FontFamily="{StaticResource DisplayFont}"
+                            Foreground="#F0F5FC" />
+                        <Grid RowSpacing="12">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Border CornerRadius="12" Background="#121A23" BorderBrush="#243140" BorderThickness="1" Padding="14">
+                                <StackPanel>
+                                    <TextBlock Text="CPU temperature" FontFamily="{StaticResource BodyFont}" Foreground="#97A4B4" FontWeight="SemiBold" FontSize="12" />
+                                    <TextBlock x:Name="CpuTempValue" Text="--" FontFamily="{StaticResource DisplayFont}" FontSize="24" FontWeight="SemiBold" Foreground="#F0F5FC" />
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Row="1" CornerRadius="12" Background="#121A23" BorderBrush="#243140" BorderThickness="1" Padding="14">
+                                <StackPanel>
+                                    <TextBlock Text="Detected fans" FontFamily="{StaticResource BodyFont}" Foreground="#97A4B4" FontWeight="SemiBold" FontSize="12" />
+                                    <TextBlock x:Name="FanCountValue" Text="--" FontFamily="{StaticResource DisplayFont}" FontSize="24" FontWeight="SemiBold" Foreground="#F0F5FC" />
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Row="2" CornerRadius="12" Background="#121A23" BorderBrush="#243140" BorderThickness="1" Padding="14">
+                                <StackPanel>
+                                    <TextBlock Text="Per-fan RPM" FontFamily="{StaticResource BodyFont}" Foreground="#97A4B4" FontWeight="SemiBold" FontSize="12" />
+                                    <TextBlock x:Name="FanSpeedsValue" Text="--" FontFamily="{StaticResource BodyFont}" TextWrapping="WrapWholeWords" Foreground="#F0F5FC" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1" Grid.ColumnSpan="2" CornerRadius="16" BorderBrush="#253241" BorderThickness="1" Background="#0F161E" Padding="22">
+                    <Grid ColumnSpacing="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Spacing="16">
+                            <TextBlock
+                                Text="Control summary"
+                                FontSize="20"
+                                FontWeight="SemiBold"
+                                FontFamily="{StaticResource DisplayFont}"
+                                Foreground="#F0F5FC" />
+                            <TextBlock
+                                Text="These settings determine how the app writes fan values, how safely it clamps requests, and whether it returns control when you close it."
+                                FontFamily="{StaticResource BodyFont}"
+                                TextWrapping="WrapWholeWords"
+                                Foreground="#97A4B4" />
+
+                            <Grid ColumnSpacing="20" RowSpacing="18">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Spacing="4">
+                                    <TextBlock
+                                        Text="Live apply"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        FontFamily="{StaticResource DisplayFont}"
+                                        Foreground="#F0F5FC" />
+                                    <TextBlock
+                                        Text="Write the staged speed immediately when the slider moves."
+                                        FontFamily="{StaticResource BodyFont}"
+                                        FontSize="11"
+                                        TextWrapping="WrapWholeWords"
+                                        Foreground="#97A4B4" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Spacing="4">
+                                    <TextBlock
+                                        Text="Safe clamp"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        FontFamily="{StaticResource DisplayFont}"
+                                        Foreground="#F0F5FC" />
+                                    <TextBlock
+                                        Text="Keep manual requests inside the ASUS-safe operating range."
+                                        FontFamily="{StaticResource BodyFont}"
+                                        FontSize="11"
+                                        TextWrapping="WrapWholeWords"
+                                        Foreground="#97A4B4" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Spacing="4">
+                                    <TextBlock
+                                        Text="Tray on close"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        FontFamily="{StaticResource DisplayFont}"
+                                        Foreground="#F0F5FC" />
+                                    <TextBlock
+                                        Text="Hide to the notification area instead of closing the session."
+                                        FontFamily="{StaticResource BodyFont}"
+                                        FontSize="11"
+                                        TextWrapping="WrapWholeWords"
+                                        Foreground="#97A4B4" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Grid.Column="1" Spacing="4">
+                                    <TextBlock
+                                        Text="Release on exit"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        FontFamily="{StaticResource DisplayFont}"
+                                        Foreground="#F0F5FC" />
+                                    <TextBlock
+                                        Text="Return ASUS control to the system when the app exits."
+                                        FontFamily="{StaticResource BodyFont}"
+                                        FontSize="11"
+                                        TextWrapping="WrapWholeWords"
+                                        Foreground="#97A4B4" />
+                                </StackPanel>
+                            </Grid>
+
+                            <TextBlock
+                                Text="Window placement and control state persist locally under %LocalAppData%\AsusFanControl."
+                                FontFamily="{StaticResource BodyFont}"
+                                TextWrapping="WrapWholeWords"
+                                Foreground="#7E8B99"
+                                FontSize="11" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Spacing="12">
+                            <TextBlock
+                                Text="Control settings"
+                                FontSize="20"
+                                FontWeight="SemiBold"
+                                FontFamily="{StaticResource DisplayFont}"
+                                Foreground="#F0F5FC" />
+                            <TextBlock
+                                Text="These toggles are stored locally and restored on the next launch."
+                                FontFamily="{StaticResource BodyFont}"
+                                TextWrapping="WrapWholeWords"
+                                Foreground="#97A4B4" />
+                            <ToggleSwitch x:Name="TurnOffOnExitToggle" Header="Release control on exit" IsOn="True" Toggled="TurnOffOnExit_Toggled" />
+                            <ToggleSwitch x:Name="SafeClampToggle" Header="Safe clamping" IsOn="True" Toggled="SafeClamp_Toggled" />
+                            <ToggleSwitch x:Name="LiveApplyToggle" Header="Live apply" IsOn="False" Toggled="LiveApply_Toggled" />
+                            <ToggleSwitch x:Name="MinimizeToTrayToggle" Header="Minimize to tray" IsOn="False" Toggled="MinimizeToTray_Toggled" />
+                            <ToggleSwitch x:Name="AutoRefreshToggle" Header="Auto refresh telemetry" IsOn="False" Toggled="AutoRefresh_Toggled" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

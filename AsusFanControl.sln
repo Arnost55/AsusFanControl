@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsusFanControl", "AsusFanCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsusFanControlGUI", "AsusFanControlGUI\AsusFanControlGUI.csproj", "{42CC78B6-E3BB-4092-A423-A4EC20FB3C11}"
 EndProject
+Project("{BC8A1FFA-BEE3-4634-8014-F334798102B3}") = "AsusFanControlNativeCore", "AsusFanControlNativeCore\AsusFanControlNativeCore.vcxproj", "{C5F55747-2425-4DAB-B469-4DF6F268DC65}"
+EndProject
+Project("{BC8A1FFA-BEE3-4634-8014-F334798102B3}") = "AsusFanControlNative", "AsusFanControlNative\AsusFanControlNative.vcxproj", "{BAA77435-0C08-4CFE-8F76-AD652062ED1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +25,14 @@ Global
 		{42CC78B6-E3BB-4092-A423-A4EC20FB3C11}.Debug|x64.Build.0 = Debug|x64
 		{42CC78B6-E3BB-4092-A423-A4EC20FB3C11}.Release|x64.ActiveCfg = Release|x64
 		{42CC78B6-E3BB-4092-A423-A4EC20FB3C11}.Release|x64.Build.0 = Release|x64
+		{C5F55747-2425-4DAB-B469-4DF6F268DC65}.Debug|x64.ActiveCfg = Debug|x64
+		{C5F55747-2425-4DAB-B469-4DF6F268DC65}.Debug|x64.Build.0 = Debug|x64
+		{C5F55747-2425-4DAB-B469-4DF6F268DC65}.Release|x64.ActiveCfg = Release|x64
+		{C5F55747-2425-4DAB-B469-4DF6F268DC65}.Release|x64.Build.0 = Release|x64
+		{BAA77435-0C08-4CFE-8F76-AD652062ED1F}.Debug|x64.ActiveCfg = Debug|x64
+		{BAA77435-0C08-4CFE-8F76-AD652062ED1F}.Debug|x64.Build.0 = Debug|x64
+		{BAA77435-0C08-4CFE-8F76-AD652062ED1F}.Release|x64.ActiveCfg = Release|x64
+		{BAA77435-0C08-4CFE-8F76-AD652062ED1F}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

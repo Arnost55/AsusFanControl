@@ -1,0 +1,8 @@
+namespace AsusFanControlNative
+{
+    runtimeclass MainWindow : Microsoft.UI.Xaml.Controls.Page
+    {
+        MainWindow();
+        void InitializeNativeWindow(Microsoft.UI.Xaml.Window window);
+    }
+}

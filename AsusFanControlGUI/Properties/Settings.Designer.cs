@@ -34,6 +34,30 @@ namespace AsusFanControlGUI.Properties {
                 this["fanSpeed"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string lastSelectedPresetId {
+            get {
+                return ((string)(this["lastSelectedPresetId"]));
+            }
+            set {
+                this["lastSelectedPresetId"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 0, 0")]
+        public global::System.Drawing.Rectangle windowBounds {
+            get {
+                return ((global::System.Drawing.Rectangle)(this["windowBounds"]));
+            }
+            set {
+                this["windowBounds"] = value;
+            }
+        }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
